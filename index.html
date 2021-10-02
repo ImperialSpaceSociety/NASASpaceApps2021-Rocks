@@ -46,18 +46,48 @@
 
         <div class="sliders">
             <div class="xSlider">
-                <h3></h3>
-                <input type="range" min="1" max="1000" value="60" class="rotationSlider" id="omegaX">
+                <h3>X rotation</h3>
+                <div id="xout"></div>
+                <input type="range" min="1" max="100" value="60" class="rotationSlider" id="omegaX">
             </div>
+
+            <script>
+                var intervalId = setInterval(function() {
+                    document.getElementById("xout").innerHTML =
+                        parseFloat(document.getElementById("omegaX").value)/100-0.5 +" rad/s"
+                }, 100);
+            </script>
+
             <div class="ySlider">
-                <input type="range" min="1" max="1000" value="50" class="rotationSlider" id="omegaY">
+                <h3>Y rotation</h3>
+                <div id="yout"></div>
+                <input type="range" min="1" max="100" value="50" class="rotationSlider" id="omegaY">
             </div>
+
+            <script>
+                var intervalId = setInterval(function() {
+                    document.getElementById("yout").innerHTML =
+                        parseFloat(document.getElementById("omegaY").value)/100-0.5 +" rad/s"
+                }, 100);
+            </script>
+
             <div class="zSlider">
-                <input type="range" min="1" max="1000" value="50" class="rotationSlider" id="omegaZ">
+                <h3>Z rotation</h3>
+                <div id="zout"></div>
+                <input type="range" min="1" max="100" value="50" class="rotationSlider" id="omegaZ">
             </div>
+
+            <script>
+                var intervalId = setInterval(function() {
+                    document.getElementById("zout").innerHTML =
+                        parseFloat(document.getElementById("omegaZ").value)/100-0.5 +" rad/s"
+                }, 100);
+            </script>
+
         </div>
     </div>
     <div class="grapher">
+        <div class="graphTitle"><h1>Illuminance over time</h1></div>
         <div class="lightGraphWrapper">
             <canvas id="lightGraph" width=160 height=90></canvas>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
@@ -75,7 +105,7 @@
                 }
 
 
-                var intervalId = setInterval(moveStuff, 50);
+                var intervalId = setInterval(moveStuff, 100);
 
             </script>
         </div>

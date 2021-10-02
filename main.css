@@ -59,10 +59,11 @@ body {
 }
 
 .grapher{
-    width: 50vw;
+    width: 45vw;
     display: grid;
-    height: 50vh;
     background-color: red;
+    padding-top: 5vh;
+    padding-left: 3vw;
 }
 
 .raytracer{
@@ -76,4 +77,16 @@ body {
     grid-template-columns: auto auto auto;
     background-color: lightblue;
 }
-
+.rtxCanvasWrapper{
+    padding-left: 2.5vw;
+    padding-top: 2vw;
+}
+.graphTitle{
+    height: 15vh;
+}
+.sliders{
+    padding-left: 3vw;
+}
+.sliders h3{
+    display: inline;
+}
