@@ -31,6 +31,10 @@ const MODELS = [
         path: '../3DModels/Sphere.glb',
         name: 'Sphere'
     },
+    {
+        path: '../3DModels/Teapot.glb',
+        name: 'Teapot'
+    },
 ];
 
 function init() {
@@ -50,7 +54,7 @@ function init() {
     // Loader
     const thingLoader = new GLTFLoader();
     
-    thingLoader.load(MODELS[5].path, function (gltf) {
+    thingLoader.load(MODELS[7].path, function (gltf) {
         var model = gltf.scene
         model.scale.set(3,3,3);
         scene.add(model);
