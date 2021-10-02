@@ -9,7 +9,13 @@ function DrawChart(ys, xs) {
                 label: 'Normalized Illuminance',
                 data: ys
             }]
+        },
+        options: {
+            animation: {
+                duration: 0
+            }
         }
+
     }
 
     let c = new Chart(context, config);
