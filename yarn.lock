@@ -4234,6 +4234,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+ray-tracing-renderer@^0.10.15:
+  version "0.10.15"
+  resolved "https://registry.yarnpkg.com/ray-tracing-renderer/-/ray-tracing-renderer-0.10.15.tgz#178516a1e8001c58548b2f8c110fa6ddf857a6c8"
+  integrity sha512-1/tlCuKBZ392Ih2c61eIf2OIHwU4qVmIzULwQoX3WCHPlEoPhVUKAqJCDdNjZfUnXsraIJDPqCf6haACUZDsXQ==
+
 "readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.3, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.7"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
