@@ -4,6 +4,8 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.RayTracingRenderer = {}, global.THREE));
 }(this, (function (exports, THREE$1) { 'use strict';
 
+  let ticks = 0;
+  const TICKS_COUNT = 100;
   const ThinMaterial = 1;
   const ThickMaterial = 2;
   const ShadowCatcherMaterial = 3;
@@ -3989,7 +3991,9 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       renderPass.setTexture('positionTex', position);
 
       renderPass.useProgram();
-      fullscreenQuad.draw();
+      if (ticks > TICKS_COUNT) {
+        fullscreenQuad.draw();
+      }
     }
 
     return {
@@ -4333,6 +4337,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
     function toneMapToScreen(lightTexture, lightScale) {
       gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+      console.log('toneMapPass');
       toneMapPass.draw({
         light: lightTexture,
         lightScale,
@@ -4374,6 +4379,8 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     }
 
     function drawPreview() {
+      console.log('draw preview');
+
       if (sampleCount > 0) {
         swapBuffers();
       }
@@ -4408,6 +4415,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     }
 
     function drawTile() {
+      console.log('draw Tile');
       const { x, y, tileWidth, tileHeight, isFirstTile, isLastTile } = tileRender.nextTile(elapsedFrameTime);
 
       if (isFirstTile) {
@@ -4655,6 +4663,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     let lastFocus = false;
 
     module.render = (scene, camera) => {
+      ticks++;
       if (!module.renderWhenOffFocus) {
         const hasFocus = document.hasFocus();
         if (!hasFocus) {
@@ -4686,12 +4695,18 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
       camera.updateMatrixWorld();
 
-      if(module.maxHardwareUsage) {
+      console.log('pipeline');
+      console.log(pipeline);
+      if (module.maxHardwareUsage) {
         // render new sample for the entire screen
         pipeline.drawFull(camera);
       } else {
         // render new sample for a tiled subset of the screen
         pipeline.draw(camera);
+      }
+
+      if (ticks > TICKS_COUNT) {
+        ticks = 0;
       }
     };
 
@@ -4705,6 +4720,9 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       document.removeEventListener('visibilitychange', restartTimer);
       pipeline = null;
     };
+
+    console.log('module');
+    console.log(module);
 
     return module;
   }

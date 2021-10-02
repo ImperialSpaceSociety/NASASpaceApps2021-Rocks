@@ -93,8 +93,8 @@ const tick = (time) => {
     //camera.focus = controls.target.distanceTo(camera.position);
     camera.position.set(0, 20, 0);
 
-    if (ticks > 50) {
-        rotation += 0.02;
+    if (ticks > 100) {
+        rotation += 0.1;
         ticks = 0;
         cancelAnimationFrame(animationFrameId);
         selectModelFromName('Cornell Box');
@@ -150,7 +150,7 @@ function updateCameraFromModel(camera, model) {
 
     // TODO: Why do we need this?
     // controls.target.set(centroid);
-    camera.position.set(0, (bounds.max.y - bounds.min.y) * 0.75, distance * 2.0);
+    //camera.position.set(0, (bounds.max.y - bounds.min.y) * 0.75, distance * 2.0);
     camera.aperture = 0.01 * distance;
 
     controls.target.copy(centroid);
@@ -245,11 +245,6 @@ async function init() {
 
     const envMapController = gui.add(uiOptions, 'selectedEnvMap', uiOptions.envMapOptions)
         .name('env map');
-
-    modelController.onChange(async (value) => {
-        cancelAnimationFrame(animationFrameId);
-        selectModelFromName(value);
-    });
 
     envMapController.onChange(async (value) => {
         console.log(value);
