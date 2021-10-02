@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Rocks</title>
+    <link rel="stylesheet" href="lightgraph.css">
+</head>
+
+<body>
+
+
+<div class="lightGraphWrapper">
+    <canvas id="lightGraph" width=160 height=90></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="lightgraph.js"></script>
+
+    <!--Sample data series-->
+    <script>
+        let normalizedIlluminance = [0.9, 0.8, 0.25, 0.6, 0.9];
+        let time = [1, 2, 3, 4, 5];
+        DrawChart(normalizedIlluminance,time)
+
+    </script>
+</div>
+
+
+</body>
+</html>
