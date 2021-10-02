@@ -5,7 +5,6 @@
 }(this, (function (exports, THREE$1) { 'use strict';
 
   let ticks = 0;
-  const TICKS_COUNT = 100;
   const ThinMaterial = 1;
   const ThickMaterial = 2;
   const ShadowCatcherMaterial = 3;
@@ -3954,7 +3953,8 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
   function makeToneMapPass(gl, params) {
     const {
       fullscreenQuad,
-      toneMappingParams
+      toneMappingParams,
+      ticksPerRotation
     } = params;
 
     const renderPassConfig = {
@@ -3991,7 +3991,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       renderPass.setTexture('positionTex', position);
 
       renderPass.useProgram();
-      if (ticks > TICKS_COUNT) {
+      if (ticks > ticksPerRotation) {
         fullscreenQuad.draw();
       }
     }
@@ -4127,6 +4127,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       scene,
       toneMappingParams,
       bounces, // number of global illumination bounces
+      ticksPerRotation,
     }) {
 
     const maxReprojectedSamples = 20;
@@ -4159,7 +4160,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
     const reprojectPass = makeReprojectPass(gl, { fullscreenQuad, maxReprojectedSamples });
 
-    const toneMapPass = makeToneMapPass(gl, { fullscreenQuad, toneMappingParams });
+    const toneMapPass = makeToneMapPass(gl, { fullscreenQuad, toneMappingParams, ticksPerRotation });
 
     const gBufferPass = makeGBufferPass(gl, { materialBuffer, mergedMesh });
 
@@ -4337,7 +4338,6 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
     function toneMapToScreen(lightTexture, lightScale) {
       gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-      console.log('toneMapPass');
       toneMapPass.draw({
         light: lightTexture,
         lightScale,
@@ -4379,8 +4379,6 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     }
 
     function drawPreview() {
-      console.log('draw preview');
-
       if (sampleCount > 0) {
         swapBuffers();
       }
@@ -4415,7 +4413,6 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     }
 
     function drawTile() {
-      console.log('draw Tile');
       const { x, y, tileWidth, tileHeight, isFirstTile, isLastTile } = tileRender.nextTile(elapsedFrameTime);
 
       if (isFirstTile) {
@@ -4555,6 +4552,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
   function RayTracingRenderer(params = {}) {
     const canvas = params.canvas || document.createElement('canvas');
+    const ticksPerRotation = params.ticksPerRotation || 100;
 
     const gl = canvas.getContext('webgl2', {
       alpha: false,
@@ -4595,7 +4593,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
       const bounces = module.bounces;
 
-      pipeline = makeRenderingPipeline({gl, optionalExtensions, scene, toneMappingParams, bounces});
+      pipeline = makeRenderingPipeline({gl, optionalExtensions, scene, toneMappingParams, bounces, ticksPerRotation});
 
       pipeline.onSampleRendered = (...args) => {
         if (module.onSampleRendered) {
@@ -4695,8 +4693,6 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
       camera.updateMatrixWorld();
 
-      console.log('pipeline');
-      console.log(pipeline);
       if (module.maxHardwareUsage) {
         // render new sample for the entire screen
         pipeline.drawFull(camera);
@@ -4705,7 +4701,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
         pipeline.draw(camera);
       }
 
-      if (ticks > TICKS_COUNT) {
+      if (ticks > ticksPerRotation) {
         ticks = 0;
       }
     };
@@ -4720,9 +4716,6 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       document.removeEventListener('visibilitychange', restartTimer);
       pipeline = null;
     };
-
-    console.log('module');
-    console.log(module);
 
     return module;
   }
