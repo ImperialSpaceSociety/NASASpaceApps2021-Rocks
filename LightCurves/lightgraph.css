@@ -1,4 +1,7 @@
 .lightGraphWrapper{
-    width: 50vw;
+    width: 40vw;
     /* Overrides one of the size attributes, to adjust aspect ratio change canvas properties */
+}
+.lightGraphWrapper{
+    display: inline-block;
 }
