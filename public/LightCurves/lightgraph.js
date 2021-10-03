@@ -1,7 +1,6 @@
 let normalizedIlluminance = [];
 let time = [];
 
-
 function DrawChart(ys, xs) {
     var context = document.getElementById('lightGraph');
 
@@ -16,41 +15,41 @@ function DrawChart(ys, xs) {
         },
         options: {
             animation: {
-                        duration: 0
-                    },
+                duration: 0
+            },
             scales: {
-                y: {
-                    min: 0,
-                    max: 100
-                }
+                yAxes: [{
+                    ticks: {
+                        max: 100,
+                        min: 0,
+                        stepSize: 10
+                    }
+                }]
             }
         }
 
     }
     let c = new Chart(context, config);
-    c.options.scales[y].max = 100;
-    c.options.scales[y].min = 0;
-
 }
 
-window.addPoint= function (brightness){
+window.addPoint = function (brightness) {
     normalizedIlluminance.push(brightness);
 
     var date = new Date();
     var secs = date.getTime();
     time.push(secs);
 
-    if (normalizedIlluminance.length>40){
+    if (normalizedIlluminance.length > 40) {
         normalizedIlluminance.shift();
         time.shift();
     }
 
     let corrected_time = [];
 
-    for (let i = 0; i < time.length; i++){
-        corrected_time.push((time[i] - secs)/1000);
+    for (let i = 0; i < time.length; i++) {
+        corrected_time.push((time[i] - secs) / 1000);
     }
     console.log(corrected_time);
 
-    DrawChart(normalizedIlluminance,corrected_time);
-    }
+    DrawChart(normalizedIlluminance, corrected_time);
+}
