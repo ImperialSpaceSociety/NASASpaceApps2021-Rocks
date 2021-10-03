@@ -67,21 +67,6 @@
         <div class="lightGraphWrapper">
             <canvas id="lightGraph" width=400 height=400></canvas>
 
-            <!--Sample data series-->
-            <script>
-                let normalizedIlluminance = [0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9];
-                let time = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
-
-                function moveStuff(){
-                    DrawChart(normalizedIlluminance,time)
-                    normalizedIlluminance.unshift(normalizedIlluminance.pop())
-                    time.unshift(time.pop())
-                }
-
-
-                var intervalId = setInterval(moveStuff, 100);
-
-            </script>
         </div>
     </div>
     </div>

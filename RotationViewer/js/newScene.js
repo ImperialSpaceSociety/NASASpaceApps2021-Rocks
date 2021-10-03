@@ -47,7 +47,7 @@ const MODELS = [
 
 //Initial Definitions
 let ModListLen = MODELS.length;
-let scene, camera, renderer, model;
+let scene, camera, renderer, model, data, temp;
 let width = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let height = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let modelnum = 0;
@@ -117,7 +117,7 @@ function animate(){
 
     if (counter == dataGap){
         data = renderer.domElement.toDataURL();
-        // console.log(data);
+        //console.log(data);
         counter = 0;
         pngProcess(data);
     };
@@ -228,6 +228,7 @@ function pngProcess(image){
         temp = valStr.split(',')
         temp = temp.map((i) => Number(i));
         temp = temp[0] + temp[1] + temp[2]
+        addPoint(temp);
         console.log(temp);
     })
 };
