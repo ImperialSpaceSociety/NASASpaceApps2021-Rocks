@@ -47,19 +47,21 @@ const MODELS = [
 
 //Initial Definitions
 let ModListLen = MODELS.length;
-let scene, camera, renderer, model;
+let scene, camera, renderer, model, data;
 let width = window.innerWidth;
 let height = window.innerHeight;
 let modelnum = 0;
+let counter = 0;
 let thingLoader, texLoader;
+let dataGap = 10;
+const canvas = document.querySelector("canvas");
+const fac = new FastAverageColor();
 
-// const canvas = document.getElementById("canvas");
-// const canvasctx = canvas.getContext("2d");
 
 function init(){
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer(canvas);
     renderer.setSize(width,height);
     document.body.appendChild( renderer.domElement );
 
@@ -69,7 +71,7 @@ function init(){
     document.addEventListener("keypress", function onEvent(event) {
         if (event.code === 'Space'){
             removeThing(model);
-            console.log("Key Pressed")
+            console.log("New model")
             if (modelnum <= ModListLen - 2){
                 modelnum += 1;
             }
@@ -77,6 +79,7 @@ function init(){
                 modelnum = 0;
             }
             addThing(modelnum);
+            
         }
     })
 
@@ -89,13 +92,21 @@ function init(){
     setScene();
     addThing(modelnum);
     animate();
-    pixelData();
 };
 
 function animate(){
     requestAnimationFrame( animate );
     transforms(model, 0.01, 0.01);
     renderer.render(scene, camera);
+    counter ++;
+
+    if (counter == dataGap){
+        data = renderer.domElement.toDataURL();
+        // console.log(data);
+        counter = 0;
+        pngProcess(data);
+    };
+
 };
 
 function setScene(){
@@ -140,8 +151,10 @@ function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra
     item.position.z += zTra;
 };
 
-function pixelData(){
-
+function pngProcess(image){
+    fac.getColorAsync(image).then(color => {
+        console.log(color);
+    })
 };
 
 init();
