@@ -43,6 +43,16 @@ const MODELS = [
         name: 'Teapot',
         scalefactor: 4.5
     },
+    {
+        path: '../3DModels/Asteroid2.glb',
+        name: 'Asteroid2',
+        scalefactor: 50
+    },
+    {
+        path: '../3DModels/Asteroid3.glb',
+        name: 'Asteroid3',
+        scalefactor: 70
+    },
 ];
 
 //Initial Definitions
