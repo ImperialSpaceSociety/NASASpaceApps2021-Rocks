@@ -82,9 +82,14 @@ h1 {
 }
 
 .buttons {
-    padding-top: 3vh;
-    padding-left: 4vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
+.buttons button.waves-effect {
+    border: 0;
+    color: white;
 }
 
 .grapher {
@@ -92,8 +97,9 @@ h1 {
 }
 
 .raytracer {
-    display: grid;
-    background-color: dimgray;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .contentWrapper {
@@ -102,6 +108,8 @@ h1 {
     background-color: lightgrey;
     column-gap: 16px;
     padding: 16px;
+    height: calc(100vh - 64px);
+    grid-template-rows: 1fr;
 }
 
 .contentWrapper .card {
@@ -109,8 +117,8 @@ h1 {
 }
 
 .rtxCanvasWrapper {
-    padding-left: 8vw;
-    padding-top: 0vw;
+    flex: 1;
+    margin-top: 16px;
 }
 
 .graphTitle {
@@ -126,4 +134,15 @@ h1 {
 
 .sliders h3 {
     display: inline;
+}
+
+body, .contentWrapper .card, .contentWrapper .card .card-content {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.contentWrapper .card .card-content .rtxCanvasWrapper {
+    display: flex;
+    flex: 1;
 }

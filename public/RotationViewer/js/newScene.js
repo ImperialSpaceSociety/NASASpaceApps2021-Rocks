@@ -48,8 +48,8 @@ const MODELS = [
 //Initial Definitions
 let ModListLen = MODELS.length;
 let scene, camera, renderer, model, data, temp;
-let width = 0.9 * document.getElementById('rtxCanvas').clientWidth;
-let height = 0.9 * document.getElementById('rtxCanvas').clientWidth;
+let width = document.getElementById('rtxCanvas').clientWidth;
+let height = document.getElementById('rtxCanvas').clientHeight;
 let modelnum = 0;
 let counter = 0;
 let thingLoader, texLoader;

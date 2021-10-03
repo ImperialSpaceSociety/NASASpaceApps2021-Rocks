@@ -27,40 +27,12 @@
         <div class="card-content">
             <div class="raytracer">
                 <div class="buttons">
-                    <button type="button" onclick="buttonUpdate('Asteroid')">Asteroid</button>
-                    <button type="button" onclick="buttonUpdate('Tesla')">Tesla</button>
-                    <button type="button" onclick="buttonUpdate('Duck')">Duck</button>
-                    <button type="button" onclick="buttonUpdate('Cycle')">Cycle</button>
+                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Asteroid')">Asteroid</button>
+                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Tesla')">Tesla</button>
+                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Duck')">Duck</button>
+                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Cycle')">Cycle</button>
                 </div>
-
-                <div class="rtxCanvasWrapper">
-                    <div id="rtxCanvas"></div>
-                </div>
-
-
-                <div class="sliders">
-
-                    <div class="xSlider">
-                        <h3>X rotation</h3>
-                        <div id="xout"></div>
-                        <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX"
-                               onchange="rotationUpdate('xout', 'omegaX')">
-                    </div>
-
-                    <div class="ySlider">
-                        <h3>Y rotation</h3>
-                        <div id="yout"></div>
-                        <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY"
-                               onchange="rotationUpdate('yout', 'omegaY' )">
-                    </div>
-
-                    <div class="zSlider">
-                        <h3>Z rotation</h3>
-                        <div id="zout"></div>
-                        <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ"
-                               onchange="rotationUpdate('zout', 'omegaZ' )">
-                    </div>
-
+                <div id="rtxCanvas" class="rtxCanvasWrapper">
                 </div>
             </div>
         </div>
@@ -75,6 +47,31 @@
                     </div>
                 </div>
             </div>
+
+            <!--<div class="sliders">
+
+                <div class="xSlider">
+                    <h3>X rotation</h3>
+                    <div id="xout"></div>
+                    <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX"
+                           onchange="rotationUpdate('xout', 'omegaX')">
+                </div>
+
+                <div class="ySlider">
+                    <h3>Y rotation</h3>
+                    <div id="yout"></div>
+                    <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY"
+                           onchange="rotationUpdate('yout', 'omegaY' )">
+                </div>
+
+                <div class="zSlider">
+                    <h3>Z rotation</h3>
+                    <div id="zout"></div>
+                    <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ"
+                           onchange="rotationUpdate('zout', 'omegaZ' )">
+                </div>
+
+            </div>-->
         </div>
     </div>
 </div>

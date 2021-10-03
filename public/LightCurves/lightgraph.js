@@ -51,7 +51,6 @@ function DrawChart(ys, xs) {
         }
     }
     let c = new Chart(context, config);
-    console.log(c);
 }
 
 window.addPoint = function (brightness) {
@@ -71,7 +70,6 @@ window.addPoint = function (brightness) {
     for (let i = 0; i < time.length; i++) {
         corrected_time.push((time[i] - secs) / 1000);
     }
-    console.log(corrected_time);
 
     DrawChart(normalizedIlluminance, corrected_time);
 }
