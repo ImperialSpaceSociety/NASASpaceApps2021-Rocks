@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: "Lucida Console", "Courier New", monospace;
+
 }
 .topnav div {
     display: inline-block;
@@ -29,8 +30,9 @@ body {
     display: inline-block;
 }
 
-.topnav h1{
+ h1{
     display: inline-block;
+     margin: 0;
 }
 
 
@@ -53,7 +55,7 @@ body {
 }
 
 .buttons{
-    padding-top: 2vh;
+    padding-top: 3vh;
     padding-left: 4vw;
 
 }
@@ -61,31 +63,34 @@ body {
 .grapher{
     width: 45vw;
     display: grid;
-    background-color: red;
+    //background-color: red;
     padding-top: 5vh;
     padding-left: 3vw;
+
+    background-color: lightgrey;
 }
 
 .raytracer{
     width:50vw;
-    background-color: aquamarine;
     display: grid;
+    background-color: dimgray;
 }
 
 .contentWrapper{
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: lightblue;
+    background-color: lightgrey;
+
 }
 .rtxCanvasWrapper{
-    padding-left: 2.5vw;
-    padding-top: 2vw;
+    padding-left: 8vw;
+    padding-top: 0vw;
 }
 .graphTitle{
     height: 15vh;
 }
 .sliders{
-    padding-left: 3vw;
+    padding-left: 8vw;
 }
 .sliders h3{
     display: inline;
