@@ -6,67 +6,84 @@
     <title>Imperial Rocks</title>
     <link rel="stylesheet" href="LightCurves/lightgraph.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
-<div class = "topnav">
-    <div class="logo">
-       <img src="Assets/icss.png" alt="ICSS">
-    </div>
-
-    <div class="Name">
-        <h1>Imperial Rocks! </h1>
-    </div>
-    <div class="Motto">
-        <h3>Get it? </h3>
-    </div>
-</div>
-<div class="contentWrapper">
-
-    <div class="raytracer">
-        <div class="buttons">
-
-            <button type="button" onclick="buttonUpdate('Asteroid')">Asteroid</button>
-            <button type="button" onclick="buttonUpdate('Tesla')">Tesla</button>
-            <button type="button" onclick="buttonUpdate('Duck')">Duck</button>
-            <button type="button" onclick="buttonUpdate('Cycle')">Cycle</button>
+<nav>
+    <div class="nav-wrapper grey darken-4">
+        <div class="logo">
+            <img src="Assets/icss.svg" alt="ICSS">
         </div>
-
-        <div class="rtxCanvasWrapper">
-            <div id="rtxCanvas"></div>
+        <div class="name-container">
+            <h1 class="team-name">Imperial Rocks! </h1>
+            <h3 class="motto">Get it? </h3>
         </div>
+    </div>
+</nav>
+<div class="contentWrapper grey darken-1">
+    <div class="card grey darken-3">
+        <div class="card-content">
+            <div class="raytracer">
+                <div class="buttons">
+                    <button type="button" onclick="buttonUpdate('Asteroid')">Asteroid</button>
+                    <button type="button" onclick="buttonUpdate('Tesla')">Tesla</button>
+                    <button type="button" onclick="buttonUpdate('Duck')">Duck</button>
+                    <button type="button" onclick="buttonUpdate('Cycle')">Cycle</button>
+                </div>
+
+                <div class="rtxCanvasWrapper">
+                    <div id="rtxCanvas"></div>
+                </div>
 
 
-        <div class="sliders">
+                <div class="sliders">
 
-            <div class="xSlider">
-                <h3>X rotation</h3>
-                <div id="xout"></div>
-                <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX" onchange="rotationUpdate('xout', 'omegaX')">
+                    <div class="xSlider">
+                        <h3>X rotation</h3>
+                        <div id="xout"></div>
+                        <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX"
+                               onchange="rotationUpdate('xout', 'omegaX')">
+                    </div>
+
+                    <div class="ySlider">
+                        <h3>Y rotation</h3>
+                        <div id="yout"></div>
+                        <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY"
+                               onchange="rotationUpdate('yout', 'omegaY' )">
+                    </div>
+
+                    <div class="zSlider">
+                        <h3>Z rotation</h3>
+                        <div id="zout"></div>
+                        <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ"
+                               onchange="rotationUpdate('zout', 'omegaZ' )">
+                    </div>
+
+                </div>
             </div>
-
-            <div class="ySlider">
-                <h3>Y rotation</h3>
-                <div id="yout"></div>
-                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY" onchange="rotationUpdate('yout', 'omegaY' )">
-            </div>
-
-            <div class="zSlider">
-                <h3>Z rotation</h3>
-                <div id="zout"></div>
-                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ" onchange="rotationUpdate('zout', 'omegaZ' )">
-            </div>
-
         </div>
     </div>
-    <div class="grapher">
-        <div class="grapherGrapger">
-        <div class="graphTitle"><h1>Illuminance over time</h1></div>
-        <div class="lightGraphWrapper">
-            <canvas id="lightGraph" width=400 height=400></canvas>
-
+    <div class="card grey darken-3">
+        <div class="card-content">
+            <div class="grapher">
+                <div class="grapherGrapger">
+                    <div class="graphTitle"><h1>Illuminance over time</h1></div>
+                    <div class="lightGraphWrapper">
+                        <canvas id="lightGraph" width=400 height=200></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grapher">
+                <div class="grapherGrapger">
+                    <div class="graphTitle"><h1>Illuminance over time</h1></div>
+                    <div class="lightGraphWrapper">
+                        <canvas id="lightGraph2" width=400 height=200></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
@@ -76,9 +93,9 @@
 <script src="Assets/buttons.js"></script>
 <script src="Assets/sliders.js"></script>
 <script>
-    slider_change('xout', 'omegaX' )
-    slider_change('yout', 'omegaY' )
-    slider_change('zout', 'omegaZ' )
+    slider_change('xout', 'omegaX')
+    slider_change('yout', 'omegaY')
+    slider_change('zout', 'omegaZ')
 
 </script>
 

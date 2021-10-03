@@ -20,7 +20,7 @@ function DrawChart(ys, xs) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        max: 100,
+                        max: 180,
                         min: 0,
                         stepSize: 10
                     }
