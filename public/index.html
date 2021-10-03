@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Rocks</title>
+    <link rel="stylesheet" href="LightCurves/lightgraph.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div class = "topnav">
+    <div class="logo">
+       <img src="Assets/icss.png" alt="ICSS">
+    </div>
+
+    <div class="Name">
+        <h1>Imperial Rocks! </h1>
+    </div>
+    <div class="Motto">
+        <h3>Get it? </h3>
+    </div>
+
+</div>
+<div class="contentWrapper">
+
+    <div class="raytracer">
+        <div class="buttons">
+
+            <button type="button" onclick="buttonUpdate('Asteroid')">Asteroid</button>
+            <button type="button" onclick="buttonUpdate('Tesla')">Tesla</button>
+            <button type="button" onclick="buttonUpdate('Duck')">Duck</button>
+            <button type="button" onclick="buttonUpdate('Cycle')">Cycle</button>
+        </div>
+
+        <div class="rtxCanvasWrapper">
+            <div id="rtxCanvas"></div>
+        </div>
+
+
+        <div class="sliders">
+
+            <div class="xSlider">
+                <h3>X rotation</h3>
+                <div id="xout"></div>
+                <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX" onchange="rotationUpdate('xout', 'omegaX')">
+            </div>
+
+            <div class="ySlider">
+                <h3>Y rotation</h3>
+                <div id="yout"></div>
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY" onchange="rotationUpdate('yout', 'omegaY' )">
+            </div>
+
+            <div class="zSlider">
+                <h3>Z rotation</h3>
+                <div id="zout"></div>
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ" onchange="rotationUpdate('zout', 'omegaZ' )">
+            </div>
+
+        </div>
+    </div>
+    <div class="grapher">
+        <div class="graphTitle"><h1>Illuminance over time</h1></div>
+        <div class="lightGraphWrapper">
+            <canvas id="lightGraph" width=160 height=90></canvas>
+
+            <!--Sample data series-->
+            <script>
+                let normalizedIlluminance = [0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9];
+                let time = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
+
+                function moveStuff(){
+                    DrawChart(normalizedIlluminance,time)
+                    normalizedIlluminance.unshift(normalizedIlluminance.pop())
+                    time.unshift(time.pop())
+                }
+
+
+                var intervalId = setInterval(moveStuff, 100);
+
+            </script>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="LightCurves/lightgraph.js"></script>
+<script type="module" src="RotationViewer/js/newScene.js"></script>
+<script src="Assets/buttons.js"></script>
+<script src="Assets/sliders.js"></script>
+<script>
+    slider_change('xout', 'omegaX' )
+    slider_change('yout', 'omegaY' )
+    slider_change('zout', 'omegaZ' )
+</script>
+
+</body>
+</html>
