@@ -1,7 +1,6 @@
 body {
     margin: 0;
-    font-family: "Lucida Console", "Courier New", monospace;
-
+    font-family: "Roboto", serif;
 }
 
 .topnav div {
@@ -122,8 +121,8 @@ h1 {
 }
 
 .graphTitle {
-    margin: 0;
-    font-size: 36px;
+    margin: 0 0 12px 0;
+    font-size: 28px;
     text-align: center;
     color: white;
 }
