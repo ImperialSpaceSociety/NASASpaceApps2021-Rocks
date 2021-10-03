@@ -23,15 +23,16 @@ body {
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 360px;
 }
 
 .nav-wrapper .name-container .team-name {
-    font-size: 36px;
+    font-size: 28px;
     margin: 0;
 }
 
 .nav-wrapper .name-container .motto {
-    font-size: 24px;
+    font-size: 20px;
     margin: 0 0 0 24px;
 }
 
@@ -175,4 +176,17 @@ input[type=range] {
 .sliders .slider {
     height: 64px;
     margin-bottom: 14px;
+}
+
+.logo {
+    width: 300px;
+}
+
+.name-container {
+    width: 300px;
+}
+
+.app-name {
+    margin: 14px 0 0 0;
+    font-size: 36px;
 }
