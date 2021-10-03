@@ -3993,6 +3993,10 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       renderPass.useProgram();
       if (ticks > ticksLimit) {
         fullscreenQuad.draw();
+        const canvas = document.getElementById('renderer-canvas');
+        canvas.toBlob((blob) => {
+           window.updateChart(blob);
+        });
       }
     }
 

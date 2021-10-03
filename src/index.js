@@ -1,3 +1,12 @@
+window.updateChart = blob => {
+    const reader = new FileReader();
+    reader.addEventListener('loadend', () => {
+        const array = new Uint8Array(reader.result);
+        console.log(array.reduce((acc, val) => acc + val));
+    });
+    reader.readAsArrayBuffer(blob);
+};
+
 const MODEL_PATH = 'https://models.babylonjs.com/CornellBox/cornellBox.glb';
 const TICKS_LIMIT = 200;
 const ROTATION_STEP = 0.1;
@@ -16,6 +25,7 @@ renderer.toneMappingWhitePoint = 5;
 renderer.renderWhenOffFocus = false;
 renderer.renderToScreen = true;
 
+renderer.domElement.id = 'renderer-canvas';
 document.body.appendChild(renderer.domElement);
 
 const camera = new THREE.LensCamera();
@@ -42,21 +52,19 @@ let animationFrameId;
 let ticks = 0;
 let rotation = 0;
 
-const tick = (time) => {
+const tick = async (time) => {
     ticks++;
     controls.update();
     camera.position.set(0, 20, 0);
+    renderer.sync(time);
+    renderer.render(scene, camera);
+    animationFrameId = requestAnimationFrame(tick);
 
     if (ticks > TICKS_LIMIT) {
         rotation += ROTATION_STEP;
         ticks = 0;
-        cancelAnimationFrame(animationFrameId);
         loadModel();
     }
-
-    renderer.sync(time);
-    renderer.render(scene, camera);
-    animationFrameId = requestAnimationFrame(tick);
 };
 
 function load(loader, url) {
