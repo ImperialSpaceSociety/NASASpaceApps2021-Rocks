@@ -56,6 +56,7 @@ let thingLoader, texLoader;
 let dataGap = 5;
 let x,y,z;
 let angle = Math.PI / 3;
+let oldAngle = angle;
 
 const fac = new FastAverageColor();
 
@@ -104,12 +105,15 @@ function init(){
     //         addThing(modelnum);
     // });
 
+
+
     setScene();
     addThing(modelnum);
     animate();
 };
 
 function animate(){
+
     requestAnimationFrame( animate );
     transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
@@ -121,6 +125,8 @@ function animate(){
         counter = 0;
         pngProcess(data);
     };
+
+
 
 };
 
@@ -137,6 +143,18 @@ function setScene(){
 
     //initial camera
     setCamera(0,0,5);
+
+    let delta;
+    document.addEventListener("wheel", function onEvent(event) {
+
+        if(event.deltaY > 0){
+            angle += 0.3;
+        }else{
+            angle -= 0.3;
+        };
+        // console.log(angle);
+        positionSun(light,angle);
+    });
 };
 
 function positionSun(l, alpha){
