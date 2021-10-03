@@ -49,6 +49,9 @@ const MODELS = [
     },
 ];
 
+
+
+
 function init() {
     // Creating the scene
     const scene = new THREE.Scene();
@@ -81,10 +84,10 @@ function init() {
     
         // Animate the scene
         function animate() {
-            requestAnimationFrame( animate );
+            requestAnimationFrame( animate );            
             model.rotation.x += 0.005;
             model.rotation.y += 0.01;
-            // model.rotation.z += 0.01;
+            model.rotation.z += 0.02;
             renderer.render( scene, camera );
 
             // let gl = WebGLRenderingContext;
@@ -93,6 +96,26 @@ function init() {
             // gl.readPixels(0,0,width,height, gl.RGBA, gl.FLOAT, value);
             // console.log(value);
     }
+
+//event listener
+document.addEventListener("keypress", function onEvent(event) {
+    console.log("Key Pressed")
+
+    if (modelnum <= 6){
+        modelnum += 1;
+    }
+    else{
+        modelnum = 0;
+    }
+    scene.remove(model);
+    thingLoader.load(MODELS[modelnum].path, function (gltf) {
+        var model = gltf.scene;
+        var sf = MODELS[modelnum].scalefactor;
+        model.scale.set(sf,sf,sf);
+        scene.add(model);})
+
+});
+
     animate();
     } )
 
