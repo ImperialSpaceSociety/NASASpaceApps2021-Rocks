@@ -47,7 +47,7 @@ const MODELS = [
 
 //Initial Definitions
 let ModListLen = MODELS.length;
-let scene, camera, renderer, model, data, temp;
+let scene, camera, light, renderer, model, data, temp;
 let width = window.innerWidth;
 let height = window.innerHeight;
 let modelnum = 0;
@@ -56,6 +56,7 @@ let thingLoader, texLoader;
 let dataGap = 5;
 let x,y,z;
 let angle = Math.PI / 3;
+let oldAngle = angle;
 
 const fac = new FastAverageColor();
 
@@ -100,12 +101,15 @@ function init(){
             addThing(modelnum);
     });
 
+    
+
     setScene();
     addThing(modelnum);
     animate();
 };
 
 function animate(){
+
     requestAnimationFrame( animate );
     transforms(model, 0.01, 0.01);
     renderer.render(scene, camera);
@@ -117,6 +121,8 @@ function animate(){
         counter = 0;
         pngProcess(data);
     };
+
+    
 
 };
 
@@ -133,6 +139,18 @@ function setScene(){
 
     //initial camera
     setCamera(0,0,5);
+    
+    let delta;
+    document.addEventListener("wheel", function onEvent(event) {
+
+        if(event.deltaY > 0){
+            angle += 0.3;
+        }else{
+            angle -= 0.3;
+        };
+        // console.log(angle);
+        positionSun(light,angle);
+    });
 };
 
 function positionSun(l, alpha){
@@ -182,7 +200,7 @@ function pngProcess(image){
         temp = valStr.split(',')
         temp = temp.map((i) => Number(i));
         temp = temp[0] + temp[1] + temp[2]
-        console.log(temp);
+        // console.log(temp);
     })
 };
 
