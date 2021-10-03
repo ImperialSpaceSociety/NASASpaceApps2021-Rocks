@@ -217,8 +217,6 @@ window.buttonUpdate= function (buttonID){
     addThing(modelnum);
 }
 
-function pixelData(){
-
 function pngProcess(image){
     fac.getColorAsync(image).then(color => {
         // console.log(color.rgb);
