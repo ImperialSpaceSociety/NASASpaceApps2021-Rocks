@@ -1,5 +1,6 @@
 let normalizedIlluminance = [];
 let time = [];
+const buffer = 80;
 
 function DrawChart(ys, xs) {
     const context = document.getElementById('lightGraph');
@@ -63,7 +64,7 @@ window.addPoint = function (brightness) {
     var secs = date.getTime();
     time.push(secs);
 
-    if (normalizedIlluminance.length > 40) {
+    if (normalizedIlluminance.length > buffer) {
         normalizedIlluminance.shift();
         time.shift();
     }

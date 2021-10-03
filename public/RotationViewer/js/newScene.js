@@ -68,6 +68,7 @@ let dataGap = 5;
 let x, y, z;
 let angle = Math.PI / 3;
 let oldAngle = angle;
+let loadingModel = false;
 
 const fac = new FastAverageColor();
 
@@ -179,6 +180,7 @@ function setCamera(Xpos, Ypos, Zpos) {
 };
 
 function addThing(number) {
+    loadingModel = true;
     thingLoader.load(MODELS[number].path, function (gltf) {
         model = gltf.scene;
         var sf = MODELS[number].scalefactor;
@@ -186,6 +188,7 @@ function addThing(number) {
         console.log('addThing');
         console.log(model);
         scene.add(model);
+        loadingModel = false;
     })
 };
 
@@ -236,7 +239,9 @@ window.buttonUpdate = function (buttonID) {
         }
 
     }
-    addThing(modelnum);
+    if (!loadingModel) {
+        addThing(modelnum);
+    }
 }
 
 function pngProcess(image) {
