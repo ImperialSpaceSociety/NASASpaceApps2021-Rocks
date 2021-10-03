@@ -50,7 +50,8 @@ let ModListLen = MODELS.length;
 let scene, camera, renderer, model, data, temp;
 let width = document.getElementById('rtxCanvas').clientWidth;
 let height = document.getElementById('rtxCanvas').clientHeight;
-let modelnum = 0;
+const DEFAULT_MODEL_NUM = 3;
+let modelnum = DEFAULT_MODEL_NUM;
 let counter = 0;
 let thingLoader, texLoader;
 let dataGap = 5;
@@ -60,14 +61,14 @@ let oldAngle = angle;
 
 const fac = new FastAverageColor();
 
-let xrot = 0.01;
-let yrot = 0.0;
-let zrot = 0.0;
 let fudgefactor = 0.1;
+let xrot = 0.0;
+let yrot = 0.1 * fudgefactor;
+let zrot = 0.0;
 
 function init() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(width, height);
     document.getElementById("rtxCanvas").appendChild(renderer.domElement);
@@ -113,6 +114,9 @@ function init() {
 
 function animate() {
     requestAnimationFrame(animate);
+    console.log('xrot: ' + xrot);
+    console.log('yrot: ' + yrot);
+    console.log('zrot: ' + zrot);
     transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
     counter++;
@@ -216,12 +220,11 @@ window.buttonUpdate = function (buttonID) {
 
     if (buttonID == "Asteroid") {
         modelnum = 3;
-    } else if (buttonID == "Tesla") {
+    } else if (buttonID == "Roadster") {
         modelnum = 5;
     } else if (buttonID == "Duck") {
         modelnum = 1;
-    } else if (buttonID == "Cycle") {
-        console.log("Key Pressed")
+    } else if (buttonID == "Random") {
         if (modelnum <= ModListLen - 2) {
             modelnum += 1;
         } else {
