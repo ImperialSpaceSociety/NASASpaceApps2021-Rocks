@@ -1,20 +1,10 @@
-const TICKS_PER_ROTATION = 200;
+const MODEL_PATH = 'https://models.babylonjs.com/CornellBox/cornellBox.glb';
+const TICKS_LIMIT = 200;
 const ROTATION_STEP = 0.1;
-
-const INITIAL_MODEL_DATA = {
-    path: 'https://models.babylonjs.com/CornellBox/cornellBox.glb',
-    name: 'Cornell Box',
-    license: 'https://creativecommons.org/licenses/by/4.0/',
-};
-
 let currentModelLoaded = null;
-let currentLight = null;
+let currentEnvLight = null;
 
-let animationFrameId;
-let ticks = 0;
-let rotation = 0;
-
-const renderer = new THREE.RayTracingRenderer({ticksPerRotation: TICKS_PER_ROTATION});
+const renderer = new THREE.RayTracingRenderer({ticksLimit: TICKS_LIMIT});
 
 renderer.gammaOutput = true;
 renderer.gammaFactor = 2.2;
@@ -48,12 +38,16 @@ function resize() {
     }
 }
 
+let animationFrameId;
+let ticks = 0;
+let rotation = 0;
+
 const tick = (time) => {
     ticks++;
     controls.update();
     camera.position.set(0, 20, 0);
 
-    if (ticks > TICKS_PER_ROTATION) {
+    if (ticks > TICKS_LIMIT) {
         rotation += ROTATION_STEP;
         ticks = 0;
         cancelAnimationFrame(animationFrameId);
@@ -63,7 +57,6 @@ const tick = (time) => {
     renderer.sync(time);
     renderer.render(scene, camera);
     animationFrameId = requestAnimationFrame(tick);
-
 };
 
 function load(loader, url) {
@@ -73,8 +66,8 @@ function load(loader, url) {
     });
 }
 
-async function createModelFromData(data) {
-    const gltfData = await load(THREE.GLTFLoader, data.path);
+async function createModelFromPath(path) {
+    const gltfData = await load(THREE.GLTFLoader, path);
     const gltfScene = gltfData.scene;
 
     return gltfScene;
@@ -93,6 +86,9 @@ function updateCameraFromModel(camera, model) {
 
     const distance = bounds.min.distanceTo(bounds.max);
 
+    // TODO: Why do we need this?
+    // controls.target.set(centroid);
+    //camera.position.set(0, (bounds.max.y - bounds.min.y) * 0.75, distance * 2.0);
     camera.aperture = 0.01 * distance;
 
     controls.target.copy(centroid);
@@ -111,17 +107,40 @@ function updateSceneWithModel(model) {
 }
 
 async function loadModel() {
-    const model = await createModelFromData(INITIAL_MODEL_DATA);
+    const model = await createModelFromPath(MODEL_PATH);
     updateSceneWithModel(model);
 }
 
-function addDirectionalLight() {
-    const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
-    scene.add(directionalLight);
+async function loadEnvironmentMap(path) {
+    const loadPromise = new Promise((resolve) =>
+        new THREE.RGBELoader().load(path, (environmentMapTexture) =>
+            resolve(environmentMapTexture),
+        ),
+    );
 
-    if (currentLight) scene.remove(currentLight);
+    const environmentMap = await loadPromise;
+    environmentMap.encoding = THREE.LinearEncoding;
+
+    return environmentMap;
+}
+
+async function selectEnvMapFromName() {
+    //TODO: how to remove calls to loadEnvironmentMap?
+    const path = '../envmaps/gray-background-with-dirlight.hdr';
+    const d = new Date();
+    const start = d.getTime();
+    const envMap = await loadEnvironmentMap(path);
+    const envMap2 = await loadEnvironmentMap(path);
+    const envMap3 = await loadEnvironmentMap(path);
+    const d2 = new Date();
+    const end = d2.getTime();
+    console.log('duration: ' + (end - start));
+    const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+    scene.add( directionalLight );
+
+    if (currentEnvLight) scene.remove(currentEnvLight);
     scene.add(directionalLight);
-    currentLight = directionalLight;
+    currentEnvLight = directionalLight;
 
     renderer.needsUpdate = true;
 }
@@ -130,10 +149,12 @@ async function init() {
     window.addEventListener('resize', resize);
     resize();
 
-    addDirectionalLight();
+    selectEnvMapFromName();
+
     loadModel();
 
     scene.add(camera);
+
     THREE.DefaultLoadingManager.onLoad = tick;
 }
 

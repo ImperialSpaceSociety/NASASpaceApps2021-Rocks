@@ -3954,7 +3954,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
     const {
       fullscreenQuad,
       toneMappingParams,
-      ticksPerRotation
+      ticksLimit
     } = params;
 
     const renderPassConfig = {
@@ -3991,7 +3991,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       renderPass.setTexture('positionTex', position);
 
       renderPass.useProgram();
-      if (ticks > ticksPerRotation) {
+      if (ticks > ticksLimit) {
         fullscreenQuad.draw();
       }
     }
@@ -4127,7 +4127,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
       scene,
       toneMappingParams,
       bounces, // number of global illumination bounces
-      ticksPerRotation,
+      ticksLimit
     }) {
 
     const maxReprojectedSamples = 20;
@@ -4160,7 +4160,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
     const reprojectPass = makeReprojectPass(gl, { fullscreenQuad, maxReprojectedSamples });
 
-    const toneMapPass = makeToneMapPass(gl, { fullscreenQuad, toneMappingParams, ticksPerRotation });
+    const toneMapPass = makeToneMapPass(gl, { fullscreenQuad, toneMappingParams, ticksLimit });
 
     const gBufferPass = makeGBufferPass(gl, { materialBuffer, mergedMesh });
 
@@ -4552,7 +4552,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
   function RayTracingRenderer(params = {}) {
     const canvas = params.canvas || document.createElement('canvas');
-    const ticksPerRotation = params.ticksPerRotation || 100;
+    const ticksLimit = params.ticksLimit || 100;
 
     const gl = canvas.getContext('webgl2', {
       alpha: false,
@@ -4593,7 +4593,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
 
       const bounces = module.bounces;
 
-      pipeline = makeRenderingPipeline({gl, optionalExtensions, scene, toneMappingParams, bounces, ticksPerRotation});
+      pipeline = makeRenderingPipeline({gl, optionalExtensions, scene, toneMappingParams, bounces, ticksLimit});
 
       pipeline.onSampleRendered = (...args) => {
         if (module.onSampleRendered) {
@@ -4701,7 +4701,7 @@ void sampleGlassSpecular(SurfaceInteraction si, int bounce, inout Path path) {
         pipeline.draw(camera);
       }
 
-      if (ticks > ticksPerRotation) {
+      if (ticks > ticksLimit) {
         ticks = 0;
       }
     };
