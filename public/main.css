@@ -1,0 +1,261 @@
+body {
+    margin: 0;
+    font-family: "Roboto", serif;
+}
+
+.topnav div {
+    display: inline-block;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    width: 64px;
+}
+
+.logo img {
+    height: 20px;
+}
+
+.nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 12px;
+}
+
+.name-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 64px;
+}
+
+.nav-wrapper .name-container .team-name {
+    display: none;
+    margin: 0;
+}
+
+.nav-wrapper .name-container .motto {
+    font-size: 12px;
+    display: none;
+}
+
+.topnav {
+    background-color: mediumblue;
+    width: 100%;
+    height: 10vh;
+}
+
+.topnav img {
+    height: 8vh;
+    width: auto;
+    margin-left: 5vw;
+    margin-top: 1vh;
+}
+
+.Name {
+    padding-bottom: 3vh;
+}
+
+.topnav h3 {
+    display: inline-block;
+}
+
+h1 {
+    display: inline-block;
+    margin: 0;
+}
+
+
+.rotationSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80%;
+    height: 5vh;
+    background: #dddddd;
+    outline: none;
+
+}
+
+.buttons button {
+    text-align: center;
+    display: inline-block;
+    font-size: 1.5em;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttons button.waves-effect {
+    border: 0;
+    color: white;
+}
+
+.grapher {
+    display: grid;
+}
+
+.raytracer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.contentWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 16px;
+    row-gap: 16px;
+    padding: 16px;
+    height: calc(100vh - 64px);
+}
+
+.contentWrapper .card {
+    margin: 0;
+}
+
+.rtxCanvasWrapper {
+    flex: 1;
+    margin-top: 16px;
+    min-height: 300px;
+}
+
+.graphTitle {
+    margin: 0 0 12px 0;
+    font-size: 28px;
+    text-align: center;
+    color: white;
+}
+
+.sliders h3 {
+    display: inline;
+    color: white;
+    font-size: 14px;
+}
+
+body, .contentWrapper .card, .contentWrapper .card .card-content {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.contentWrapper .card .card-content .rtxCanvasWrapper {
+    display: flex;
+    flex: 1;
+}
+
+.controls {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 8px;
+}
+
+.mdc-slider {
+    height: 0 !important;
+}
+
+.mdc-slider .mdc-slider__thumb {
+    height: 0 !important;
+}
+
+.mdc-slider .mdc-slider__track {
+    height: unset !important;
+    top: unset !important;
+}
+
+input[type=range] {
+    margin: 0; !important;
+}
+
+* {
+    --mdc-theme-primary: white !important;
+    --mdc-theme-secondary: white !important;
+}
+
+.sliders .slider {
+    height: 64px;
+    margin-bottom: 14px;
+}
+
+.app-name {
+    margin: 2px 0 0 0;
+    font-size: 20px;
+}
+
+.modal {
+    color: white;
+}
+
+.modal .modal-footer a {
+    color: white;
+}
+
+.random-rotation {
+    margin-top: 8px;
+    width: 100%
+}
+
+.large-buttons {
+    display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+    .small-buttons {
+        display: none;
+    }
+
+    .large-buttons {
+        display: flex;
+    }
+
+    .logo img {
+        padding: 12px 16px 16px 12px;
+        height: 64px;
+    }
+
+    .app-name {
+        margin: 14px 0 0 0;
+        font-size: 36px;
+    }
+
+    .nav-wrapper {
+        padding: 0 16px;
+    }
+
+    .logo {
+        width: 320px;
+    }
+
+    .name-container {
+        width: 360px;
+    }
+
+    .nav-wrapper .name-container .motto {
+        font-size: 20px;
+        margin: 0 0 0 24px;
+        display: flex;
+    }
+
+    .nav-wrapper .name-container .team-name {
+        display: flex;
+        font-size: 28px;
+        margin: 0;
+    }
+
+    .modal-trigger {
+        margin-left: 16px;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .contentWrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+}
