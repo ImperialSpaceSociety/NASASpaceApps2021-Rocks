@@ -114,9 +114,6 @@ function init() {
 
 function animate() {
     requestAnimationFrame(animate);
-    console.log('xrot: ' + xrot);
-    console.log('yrot: ' + yrot);
-    console.log('zrot: ' + zrot);
     transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
     counter++;

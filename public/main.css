@@ -179,14 +179,26 @@ input[type=range] {
 }
 
 .logo {
-    width: 300px;
+    width: 320px;
 }
 
 .name-container {
-    width: 300px;
+    width: 320px;
 }
 
 .app-name {
     margin: 14px 0 0 0;
     font-size: 36px;
+}
+
+.modal-trigger {
+    margin-left: 16px;
+}
+
+.modal {
+    color: white;
+}
+
+.modal .modal-footer a {
+    color: white;
 }

@@ -6,6 +6,7 @@
     <title>Imperial Rocks</title>
     <link rel="stylesheet" href="LightCurves/lightgraph.css">
     <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -28,6 +29,9 @@
         <div class="name-container">
             <h2 class="team-name">Imperial Rocks! </h2>
             <h3 class="motto">Get it? </h3>
+            <a class="modal-trigger" href="#modal1">
+                <i class="material-icons">info</i>
+            </a>
         </div>
     </div>
 </nav>
@@ -66,7 +70,7 @@
             </div>
             <div class="sliders">
                 <div class="xSlider slider">
-                    <h3>X rotation:<span id="xout"></span></h3>
+                    <h3>X rotation: <span id="xout"></span></h3>
 
                     <div class="mdc-slider" id="x-slider">
                         <input class="mdc-slider__input" type="range" min="1" max="1000" value="500" name="volume" id="omegaX"
@@ -119,6 +123,25 @@
         </div>
     </div>
 </div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal grey darken-2">
+    <div class="modal-content">
+        <h4>Instructions</h4>
+        <p>Try different models by clicking the buttons above the image.</p>
+        <p>Scroll mouse wheel to change the direction of sunlight.</p>
+        <p>Use sliders on the right to edit the rotation parameters of the object.</p>
+        <p>Check out the code at <a href="https://github.com/ImperialSpaceSociety/NASASpaceApps2021-Rocks" target="_blank">Github</a>.</p>
+        <p>Follow us on Twitter:
+            <a href="https://twitter.com/matbogus" target="_blank">@matbogus</a>,
+            <a href="https://twitter.com/VendaskyCZ" target="_blank">@VendaskyCZ</a>,
+            <a href="https://twitter.com/PalicMichal" target="_blank">@PalicMichal</a> and
+            <a href="https://twitter.com/JowMatias" target="_blank">@PalicMichal</a>
+        </p>
+    </div>
+    <div class="modal-footer grey darken-2">
+        <a href="#!" class="modal-close waves-effect waves-grey btn-flat">Close</a>
+    </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script src="https://unpkg.com/fast-average-color/dist/index.min.js"></script>
 <script src="LightCurves/lightgraph.js"></script>
@@ -131,6 +154,8 @@
     slider_change('zout', 'omegaZ')
 </script>
 <script>
+    M.AutoInit();
+
     var xSlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#x-slider'));
     var ySlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#y-slider'));
     var zSlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#z-slider'));
