@@ -1,5 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
 
 //Model List Paths
 const MODELS = [
@@ -11,7 +11,7 @@ const MODELS = [
     {
         path: '../3DModels/Duck.glb',
         name: 'Duck',
-        scalefactor: 3.5
+        scalefactor: 3
     },
     {
         path: '../3DModels/Fish.glb',
@@ -48,13 +48,13 @@ const MODELS = [
 //Initial Definitions
 let ModListLen = MODELS.length;
 let scene, camera, renderer, model, data, temp;
-let width = 0.9*document.getElementById('rtxCanvas').clientWidth;
-let height = 0.9*document.getElementById('rtxCanvas').clientWidth;
+let width = 0.9 * document.getElementById('rtxCanvas').clientWidth;
+let height = 0.9 * document.getElementById('rtxCanvas').clientWidth;
 let modelnum = 0;
 let counter = 0;
 let thingLoader, texLoader;
 let dataGap = 5;
-let x,y,z;
+let x, y, z;
 let angle = Math.PI / 3;
 let oldAngle = angle;
 
@@ -65,12 +65,12 @@ let yrot = 0.0;
 let zrot = 0.0;
 let fudgefactor = 0.1;
 
-function init(){
+function init() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize(width,height);
-    document.getElementById("rtxCanvas").appendChild( renderer.domElement );
+    renderer.setSize(width, height);
+    document.getElementById("rtxCanvas").appendChild(renderer.domElement);
 
     thingLoader = new GLTFLoader();
     texLoader = new THREE.TextureLoader();
@@ -106,35 +106,30 @@ function init(){
     // });
 
 
-
     setScene();
     addThing(modelnum);
     animate();
 };
 
-function animate(){
-
-    requestAnimationFrame( animate );
+function animate() {
+    requestAnimationFrame(animate);
     transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
-    counter ++;
+    counter++;
 
-    if (counter == dataGap){
+    if (counter == dataGap) {
         data = renderer.domElement.toDataURL();
         //console.log(data);
         counter = 0;
         pngProcess(data);
-    };
-
-
-
+    }
 };
 
-function setScene(){
+function setScene() {
     //set background
-    texLoader.load('RotationViewer/stars.jpg', function(texture){
+    texLoader.load('RotationViewer/stars.jpg', function (texture) {
         scene.background = texture;
-        });
+    });
 
     //set lighting
     const light = new THREE.DirectionalLight(0xffffff, 5);
@@ -142,49 +137,52 @@ function setScene(){
     scene.add(light);
 
     //initial camera
-    setCamera(0,0,5);
+    setCamera(0, 0, 5);
 
     let delta;
     document.addEventListener("wheel", function onEvent(event) {
 
-        if(event.deltaY > 0){
+        if (event.deltaY > 0) {
             angle += 0.3;
-        }else{
+        } else {
             angle -= 0.3;
-        };
+        }
+        ;
         // console.log(angle);
-        positionSun(light,angle);
+        positionSun(light, angle);
     });
 };
 
-function positionSun(l, alpha){
+function positionSun(l, alpha) {
     x = Math.sin(alpha);
     y = 0;
     z = Math.cos(alpha);
-    
-    l.position.set(x,y,z)
+
+    l.position.set(x, y, z)
 };
 
-function setCamera(Xpos,Ypos,Zpos){
+function setCamera(Xpos, Ypos, Zpos) {
     camera.position.x = Xpos;
     camera.position.y = Ypos;
     camera.position.z = Zpos;
 };
 
-function addThing(number){
+function addThing(number) {
     thingLoader.load(MODELS[number].path, function (gltf) {
         model = gltf.scene;
         var sf = MODELS[number].scalefactor;
-        model.scale.set(sf,sf,sf);
+        model.scale.set(sf, sf, sf);
+        console.log('addThing');
+        console.log(model);
         scene.add(model);
     })
 };
 
-function removeThing(item){
+function removeThing(item) {
     scene.remove(item);
 };
 
-function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra = 0){
+function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra = 0) {
     item.rotation.x += xRot;
     item.rotation.y += yRot;
     item.rotation.z += zRot;
@@ -194,40 +192,34 @@ function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra
 };
 
 
-window.rotationUpdate= function (outID,inID){
+window.rotationUpdate = function (outID, inID) {
     console.log("Rotation update");
     document.getElementById(outID).innerHTML = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5).toPrecision(2) + " rad/s";
 
-    if (inID == "omegaX"){
-        xrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
-    }
-    else if (inID == "omegaY"){
-        yrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
-    }
-    else if (inID == "omegaZ"){
-        zrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
+    if (inID == "omegaX") {
+        xrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
+    } else if (inID == "omegaY") {
+        yrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
+    } else if (inID == "omegaZ") {
+        zrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
     }
 }
 
-window.buttonUpdate= function (buttonID){
+window.buttonUpdate = function (buttonID) {
     console.log("Button update");
     removeThing(model);
 
-    if (buttonID == "Asteroid"){
+    if (buttonID == "Asteroid") {
         modelnum = 3;
-    }
-    else if (buttonID == "Tesla"){
+    } else if (buttonID == "Tesla") {
         modelnum = 5;
-    }
-    else if (buttonID == "Duck"){
+    } else if (buttonID == "Duck") {
         modelnum = 1;
-    }
-    else if (buttonID == "Cycle"){
+    } else if (buttonID == "Cycle") {
         console.log("Key Pressed")
-        if (modelnum <= ModListLen - 2){
+        if (modelnum <= ModListLen - 2) {
             modelnum += 1;
-        }
-        else{
+        } else {
             modelnum = 0;
         }
 
@@ -235,7 +227,7 @@ window.buttonUpdate= function (buttonID){
     addThing(modelnum);
 }
 
-function pngProcess(image){
+function pngProcess(image) {
     fac.getColorAsync(image).then(color => {
         // console.log(color.rgb);
         let valStr = color.rgb;
@@ -247,7 +239,6 @@ function pngProcess(image){
         temp = temp.map((i) => Number(i));
         temp = temp[0] + temp[1] + temp[2]
         addPoint(temp);
-        console.log(temp);
     })
 };
 

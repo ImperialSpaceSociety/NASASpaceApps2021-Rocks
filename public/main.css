@@ -89,7 +89,6 @@ h1 {
 
 .grapher {
     display: grid;
-    background-color: lightgrey;
 }
 
 .raytracer {
@@ -115,7 +114,10 @@ h1 {
 }
 
 .graphTitle {
-    height: 15vh;
+    margin: 0;
+    font-size: 36px;
+    text-align: center;
+    color: white;
 }
 
 .sliders {

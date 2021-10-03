@@ -2,7 +2,7 @@ let normalizedIlluminance = [];
 let time = [];
 
 function DrawChart(ys, xs) {
-    var context = document.getElementById('lightGraph');
+    const context = document.getElementById('lightGraph');
 
     let config = {
         type: 'line',
@@ -10,26 +10,48 @@ function DrawChart(ys, xs) {
             labels: xs,
             datasets: [{
                 label: 'Normalized Illuminance',
-                data: ys
+                data: ys,
+                backgroundColor: '#82b1ff',
+                borderColor: '#82b1ff',
+                color: '#ffffff'
             }]
         },
         options: {
             animation: {
                 duration: 0
             },
+            legend: {
+                display: false
+            },
             scales: {
+                xAxes: [{
+                    gridLines: {
+                        color: 'rgba(255, 255, 255, 0.5)',
+                    },
+                    ticks: {
+                        fontColor: '#ffffff'
+                    },
+                }],
                 yAxes: [{
+                    gridLines: {
+                        color: 'rgba(255, 255, 255, 0.5)',
+                    },
                     ticks: {
                         max: 180,
                         min: 0,
-                        stepSize: 10
-                    }
+                        stepSize: 10,
+                        color: '#ffffff',
+                        fontColor: '#ffffff'
+                    },
+                    title: {
+                        color: '#ffffff'
+                    },
                 }]
             }
         }
-
     }
     let c = new Chart(context, config);
+    console.log(c);
 }
 
 window.addPoint = function (brightness) {
