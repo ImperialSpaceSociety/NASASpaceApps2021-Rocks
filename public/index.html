@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/build/three.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/examples/js/loaders/RGBELoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/examples/js/libs/stats.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.108.0/examples/js/libs/dat.gui.min.js"></script>
+    <script src="RayTracingRenderer.js"></script>
     <title>Imperial Rocks</title>
     <link rel="stylesheet" href="LightCurves/lightgraph.css">
     <link rel="stylesheet" href="main.css">
@@ -34,7 +41,7 @@
         </div>
 
         <div class="rtxCanvasWrapper">
-            <div id="rtxCanvas"></div>
+            <div id="rtxCanvasContainer" class="rtxCanvasContainer"></div>
         </div>
 
 
@@ -64,28 +71,11 @@
         <div class="graphTitle"><h1>Illuminance over time</h1></div>
         <div class="lightGraphWrapper">
             <canvas id="lightGraph" width=160 height=90></canvas>
-
-            <!--Sample data series-->
-            <script>
-                let normalizedIlluminance = [0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9, 0.9, 0.8, 0.25, 0.6, 0.9];
-                let time = [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5];
-
-                function moveStuff(){
-                    DrawChart(normalizedIlluminance,time)
-                    normalizedIlluminance.unshift(normalizedIlluminance.pop())
-                    time.unshift(time.pop())
-                }
-
-
-                var intervalId = setInterval(moveStuff, 100);
-
-            </script>
         </div>
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 <script src="LightCurves/lightgraph.js"></script>
-<script type="module" src="RotationViewer/js/newScene.js"></script>
+<script src="drawChart.js"></script>
 <script src="Assets/buttons.js"></script>
 <script src="Assets/sliders.js"></script>
 <script>
@@ -93,6 +83,7 @@
     slider_change('yout', 'omegaY' )
     slider_change('zout', 'omegaZ' )
 </script>
-
+<!--Sample data series-->
+<script src="drawChart.js"></script>
 </body>
 </html>

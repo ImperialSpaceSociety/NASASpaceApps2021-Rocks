@@ -1622,6 +1622,11 @@ chalk@^2.0.0, chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
+chart.js@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.5.1.tgz#73e24d23a4134a70ccdb5e79a917f156b6f3644a"
+  integrity sha512-m5kzt72I1WQ9LILwQC4syla/LD/N413RYv2Dx2nnTkRS9iv/ey1xLTt0DnPc/eWV4zI+BgEgDYBIzbQhZHc/PQ==
+
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
@@ -2438,6 +2443,11 @@ extglob@^2.0.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+fast-average-color@^6.4.2:
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/fast-average-color/-/fast-average-color-6.4.2.tgz#e631924b5f0d2d38ee50c1cbff05ad1209ee7cda"
+  integrity sha512-aVtrSOl5m9E3dSzJTQZtm4rgAtTjTILhlLDK8UB+nseLr4Ss+rtDUVESPEGERiQ/tNckWCECQtxGvo1ickd6yA==
 
 fast-deep-equal@^3.1.1:
   version "3.1.3"
