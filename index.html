@@ -45,43 +45,30 @@
 <!--        </script>-->
 
         <div class="sliders">
+            <script src="Assets/sliders.js"></script>
+
             <div class="xSlider">
                 <h3>X rotation</h3>
                 <div id="xout"></div>
-                <input type="range" min="1" max="100" value="60" class="rotationSlider" id="omegaX">
+                <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX" onchange="slider_change('xout', 'omegaX' )">
             </div>
-
-            <script>
-                var intervalId = setInterval(function() {
-                    document.getElementById("xout").innerHTML =
-                        parseFloat(document.getElementById("omegaX").value)/100-0.5 +" rad/s"
-                }, 100);
-            </script>
 
             <div class="ySlider">
                 <h3>Y rotation</h3>
                 <div id="yout"></div>
-                <input type="range" min="1" max="100" value="50" class="rotationSlider" id="omegaY">
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY" onchange="slider_change('yout', 'omegaY' )">
             </div>
-
-            <script>
-                var intervalId = setInterval(function() {
-                    document.getElementById("yout").innerHTML =
-                        parseFloat(document.getElementById("omegaY").value)/100-0.5 +" rad/s"
-                }, 100);
-            </script>
 
             <div class="zSlider">
                 <h3>Z rotation</h3>
                 <div id="zout"></div>
-                <input type="range" min="1" max="100" value="50" class="rotationSlider" id="omegaZ">
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ" onchange="slider_change('zout', 'omegaZ' )">
             </div>
-
             <script>
-                var intervalId = setInterval(function() {
-                    document.getElementById("zout").innerHTML =
-                        parseFloat(document.getElementById("omegaZ").value)/100-0.5 +" rad/s"
-                }, 100);
+                slider_change('xout', 'omegaX' )
+                slider_change('yout', 'omegaY' )
+                slider_change('zout', 'omegaZ' )
+
             </script>
 
         </div>
