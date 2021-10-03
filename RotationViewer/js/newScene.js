@@ -51,7 +51,11 @@ let scene, camera, renderer, model;
 let width = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let height = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let modelnum = 0;
+let counter = 0;
 let thingLoader, texLoader;
+let dataGap = 10;
+const canvas = document.querySelector("canvas");
+const fac = new FastAverageColor();
 
 let xrot = 0.01;
 let yrot = 0.0;
@@ -61,17 +65,35 @@ let fudgefactor = 0.1;
 function init(){
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer(canvas);
     renderer.setSize(width,height);
     document.getElementById("rtxCanvas").appendChild( renderer.domElement );
 
     thingLoader = new GLTFLoader();
     texLoader = new THREE.TextureLoader();
 
-    document.addEventListener("keypress", function onEvent(event) {
-        if (event.code === 'Space'){
-            removeThing(model);
-            console.log("Key Pressed")
+    // document.addEventListener("keypress", function onEvent(event) {
+    //     if (event.code === 'Space'){
+    //         removeThing(model);
+    //         console.log("New model")
+    //         if (modelnum <= ModListLen - 2){
+    //             modelnum += 1;
+    //         }
+    //         else{
+    //             modelnum = 0;
+    //         }
+    //         addThing(modelnum);
+
+    //     }
+    // })
+
+    document.addEventListener("click", function onEvent(event) {
+        let mouseX = event.clientX;
+        let mouseY = event.clientY;
+        console.log(mouseX, mouseY);
+
+        removeThing(model);
+            console.log("New model")
             if (modelnum <= ModListLen - 2){
                 modelnum += 1;
             }
@@ -79,25 +101,26 @@ function init(){
                 modelnum = 0;
             }
             addThing(modelnum);
-        }
-    })
-
-    document.addEventListener("click", function onEvent(event) {
-        let mouseX = event.clientX;
-        let mouseY = event.clientY;
-        console.log(mouseX, mouseY);
-    })
+    });
 
     setScene();
     addThing(modelnum);
     animate();
-    pixelData();
 };
 
 function animate(){
     requestAnimationFrame( animate );
     transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
+    counter ++;
+
+    if (counter == dataGap){
+        data = renderer.domElement.toDataURL();
+        // console.log(data);
+        counter = 0;
+        pngProcess(data);
+    };
+
 };
 
 function setScene(){
@@ -186,6 +209,19 @@ window.buttonUpdate= function (buttonID){
 
 function pixelData(){
 
+function pngProcess(image){
+    fac.getColorAsync(image).then(color => {
+        // console.log(color.rgb);
+        let valStr = color.rgb;
+        temp = valStr.split('(');
+        valStr = temp[1];
+        temp = valStr.split(')');
+        valStr = temp[0];
+        temp = valStr.split(',')
+        temp = temp.map((i) => Number(i));
+        temp = temp[0] + temp[1] + temp[2]
+        console.log(temp);
+    })
 };
 
 init();
