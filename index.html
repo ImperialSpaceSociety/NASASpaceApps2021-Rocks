@@ -24,8 +24,10 @@
 
 </div>
 <div class="contentWrapper">
+
     <div class="raytracer">
         <div class="buttons">
+
             <button type="button">Duck</button>
             <button type="button">Car</button>
             <button type="button">Rock</button>
@@ -35,41 +37,27 @@
         <div class="rtxCanvasWrapper">
             <div id="rtxCanvas"></div>
         </div>
-        <script type="module" src="RotationViewer/js/scene.js"></script>
-        <!--Placeholder canvas draw code-->
-<!--        <script>-->
-<!--            var rtxcanvas = document.getElementById("rtxCanvas");-->
-<!--            var ctx = rtxcanvas.getContext("2d");-->
-<!--            var img = document.getElementById("scream");-->
-<!--            ctx.drawImage(img, 300, 300);-->
-<!--        </script>-->
+
 
         <div class="sliders">
-            <script src="Assets/sliders.js"></script>
 
             <div class="xSlider">
                 <h3>X rotation</h3>
                 <div id="xout"></div>
-                <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX" onchange="slider_change('xout', 'omegaX' )">
+                <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX" onchange="rotationUpdate('xout', 'omegaX')">
             </div>
 
             <div class="ySlider">
                 <h3>Y rotation</h3>
                 <div id="yout"></div>
-                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY" onchange="slider_change('yout', 'omegaY' )">
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY" onchange="rotationUpdate('yout', 'omegaY' )">
             </div>
 
             <div class="zSlider">
                 <h3>Z rotation</h3>
                 <div id="zout"></div>
-                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ" onchange="slider_change('zout', 'omegaZ' )">
+                <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ" onchange="rotationUpdate('zout', 'omegaZ' )">
             </div>
-            <script>
-                slider_change('xout', 'omegaX' )
-                slider_change('yout', 'omegaY' )
-                slider_change('zout', 'omegaZ' )
-
-            </script>
 
         </div>
     </div>
@@ -77,8 +65,6 @@
         <div class="graphTitle"><h1>Illuminance over time</h1></div>
         <div class="lightGraphWrapper">
             <canvas id="lightGraph" width=160 height=90></canvas>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-            <script src="LightCurves/lightgraph.js"></script>
 
             <!--Sample data series-->
             <script>
@@ -98,7 +84,17 @@
         </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<script src="LightCurves/lightgraph.js"></script>
+<script type="module" src="RotationViewer/js/newScene.js"></script>
+<script src="Assets/buttons.js"></script>
+<script src="Assets/sliders.js"></script>
+<script>
+    slider_change('xout', 'omegaX' )
+    slider_change('yout', 'omegaY' )
+    slider_change('zout', 'omegaZ' )
 
+</script>
 
 </body>
 </html>

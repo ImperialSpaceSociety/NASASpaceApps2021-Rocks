@@ -48,20 +48,22 @@ const MODELS = [
 //Initial Definitions
 let ModListLen = MODELS.length;
 let scene, camera, renderer, model;
-let width = window.innerWidth;
-let height = window.innerHeight;
+let width = 0.9*document.getElementById('rtxCanvas').clientWidth;
+let height = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let modelnum = 0;
 let thingLoader, texLoader;
 
-// const canvas = document.getElementById("canvas");
-// const canvasctx = canvas.getContext("2d");
+let xrot = 0.01;
+let yrot = 0.0;
+let zrot = 0.0;
+let fudgefactor = 0.1;
 
 function init(){
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000 );
+    camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(width,height);
-    document.body.appendChild( renderer.domElement );
+    document.getElementById("rtxCanvas").appendChild( renderer.domElement );
 
     thingLoader = new GLTFLoader();
     texLoader = new THREE.TextureLoader();
@@ -94,7 +96,7 @@ function init(){
 
 function animate(){
     requestAnimationFrame( animate );
-    transforms(model, 0.01, 0.01);
+    transforms(model, xrot, yrot, zrot);
     renderer.render(scene, camera);
 };
 
@@ -139,6 +141,25 @@ function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra
     item.position.y += yTra;
     item.position.z += zTra;
 };
+
+
+window.rotationUpdate= function (outID,inID){
+    console.log("Rotation update");
+    document.getElementById(outID).innerHTML = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5).toPrecision(2) + " rad/s";
+
+    if (inID == "omegaX"){
+        console.log("omegax")
+        xrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
+    }
+    else if (inID == "omegaY"){
+        console.log("omegaY")
+        yrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
+    }
+    else if (inID == "omegaZ"){
+        console.log("omegaZ")
+        zrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
+    }
+}
 
 function pixelData(){
 
