@@ -40,16 +40,16 @@
         <div class="card-content">
             <div class="raytracer">
                 <div class="buttons">
-                    <button type="button" class="waves-effect waves-light grey darken-4"
+                    <button type="button" class="btn waves-effect waves-light grey darken-4"
                             onclick="buttonUpdate('Asteroid')">Asteroid
                     </button>
-                    <button type="button" class="waves-effect waves-light grey darken-4"
+                    <button type="button" class="btn waves-effect waves-light grey darken-4"
                             onclick="buttonUpdate('Roadster')">Roadster
                     </button>
-                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Duck')">
+                    <button type="button" class="btn waves-effect waves-light grey darken-4" onclick="buttonUpdate('Duck')">
                         Duck
                     </button>
-                    <button type="button" class="waves-effect waves-light grey darken-4"
+                    <button type="button" class="btn waves-effect waves-light grey darken-4"
                             onclick="buttonUpdate('Random')">Random
                     </button>
                 </div>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="card grey darken-3">
+    <div class="card grey darken-3 right">
         <div class="card-content controls">
             <div class="grapher">
                 <div class="grapherGrapger">
@@ -71,7 +71,6 @@
             <div class="sliders">
                 <div class="xSlider slider">
                     <h3>X rotation: <span id="xout"></span></h3>
-
                     <div class="mdc-slider" id="x-slider">
                         <input class="mdc-slider__input" type="range" min="1" max="1000" value="500" name="volume" id="omegaX"
                                aria-label="Continuous slider demo">
@@ -119,6 +118,9 @@
                         </div>
                     </div>
                 </div>
+                <button type="button" class="waves-effect waves-light btn grey darken-4 random-rotation" onclick="pickRandomRotation()">
+                    Random rotation
+                </button>
             </div>
         </div>
     </div>
@@ -186,6 +188,20 @@
             lastZValue = zSliderValue;
         }
     }, 50);
+
+    window.pickRandomRotation = function() {
+        xrot = Math.floor(Math.random() * 1000);
+        xSlider.setValue(xrot);
+        window.sliderXUpdate(xrot);
+
+        yrot = Math.floor(Math.random() * 1000);
+        ySlider.setValue(yrot);
+        window.sliderYUpdate(yrot);
+
+        zrot = Math.floor(Math.random() * 1000);
+        zSlider.setValue(zrot);
+        window.sliderZUpdate(zrot);
+    };
 </script>
 </body>
 </html>

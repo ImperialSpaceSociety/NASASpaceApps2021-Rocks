@@ -198,17 +198,14 @@ function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra
 
 window.sliderXUpdate = function(val) {
     xrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
-    console.log('xrot: ' + xrot);
 };
 
 window.sliderYUpdate = function(val) {
     yrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
-    console.log(yrot);
 };
 
 window.sliderZUpdate = function(val) {
     zrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
-    console.log(zrot);
 };
 
 window.buttonUpdate = function (buttonID) {

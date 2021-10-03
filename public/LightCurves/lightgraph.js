@@ -3,6 +3,8 @@ let time = [];
 
 function DrawChart(ys, xs) {
     const context = document.getElementById('lightGraph');
+    const rightCard = document.querySelector('.card.right');
+    console.log(rightCard.clientHeight);
 
     let config = {
         type: 'line',
@@ -17,6 +19,7 @@ function DrawChart(ys, xs) {
             }]
         },
         options: {
+            aspectRatio: 2.35,
             animation: {
                 duration: 0
             },

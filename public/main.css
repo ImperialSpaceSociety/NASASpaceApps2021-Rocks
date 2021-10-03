@@ -202,3 +202,8 @@ input[type=range] {
 .modal .modal-footer a {
     color: white;
 }
+
+.random-rotation {
+    margin-top: 8px;
+    width: 100%
+}
