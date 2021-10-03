@@ -88,21 +88,21 @@ function init(){
     //     }
     // })
 
-    document.addEventListener("click", function onEvent(event) {
-        let mouseX = event.clientX;
-        let mouseY = event.clientY;
-        console.log(mouseX, mouseY);
-
-        removeThing(model);
-            console.log("New model")
-            if (modelnum <= ModListLen - 2){
-                modelnum += 1;
-            }
-            else{
-                modelnum = 0;
-            }
-            addThing(modelnum);
-    });
+    // document.addEventListener("click", function onEvent(event) {
+    //     let mouseX = event.clientX;
+    //     let mouseY = event.clientY;
+    //     console.log(mouseX, mouseY);
+    //
+    //     removeThing(model);
+    //         console.log("New model")
+    //         if (modelnum <= ModListLen - 2){
+    //             modelnum += 1;
+    //         }
+    //         else{
+    //             modelnum = 0;
+    //         }
+    //         addThing(modelnum);
+    // });
 
     setScene();
     addThing(modelnum);

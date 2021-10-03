@@ -16,13 +16,21 @@ function DrawChart(ys, xs) {
         },
         options: {
             animation: {
-                duration: 0
+                        duration: 0
+                    },
+            scales: {
+                y: {
+                    min: 0,
+                    max: 100
+                }
             }
         }
 
     }
-
     let c = new Chart(context, config);
+    c.options.scales[y].max = 100;
+    c.options.scales[y].min = 0;
+
 }
 
 window.addPoint= function (brightness){
@@ -32,7 +40,7 @@ window.addPoint= function (brightness){
     var secs = date.getTime();
     time.push(secs);
 
-    if (normalizedIlluminance.length>20){
+    if (normalizedIlluminance.length>40){
         normalizedIlluminance.shift();
         time.shift();
     }
