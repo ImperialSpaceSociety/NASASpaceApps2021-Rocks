@@ -53,8 +53,10 @@ let height = 0.9*document.getElementById('rtxCanvas').clientWidth;
 let modelnum = 0;
 let counter = 0;
 let thingLoader, texLoader;
-let dataGap = 10;
-const canvas = document.querySelector("canvas");
+let dataGap = 5;
+let x,y,z;
+let angle = Math.PI / 3;
+
 const fac = new FastAverageColor();
 
 let xrot = 0.01;
@@ -65,7 +67,7 @@ let fudgefactor = 0.1;
 function init(){
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera( 75, 1, 0.1, 1000 );
-    renderer = new THREE.WebGLRenderer(canvas);
+    renderer = new THREE.WebGLRenderer();
     renderer.setSize(width,height);
     document.getElementById("rtxCanvas").appendChild( renderer.domElement );
 
@@ -83,7 +85,6 @@ function init(){
     //             modelnum = 0;
     //         }
     //         addThing(modelnum);
-
     //     }
     // })
 
@@ -131,10 +132,19 @@ function setScene(){
 
     //set lighting
     const light = new THREE.DirectionalLight(0xffffff, 5);
+    positionSun(light, angle)
     scene.add(light);
 
     //initial camera
     setCamera(0,0,5);
+};
+
+function positionSun(l, alpha){
+    x = Math.sin(alpha);
+    y = 0;
+    z = Math.cos(alpha);
+    
+    l.position.set(x,y,z)
 };
 
 function setCamera(Xpos,Ypos,Zpos){
