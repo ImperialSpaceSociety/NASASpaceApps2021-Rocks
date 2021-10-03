@@ -128,12 +128,10 @@ h1 {
     color: white;
 }
 
-.sliders {
-    padding-left: 8vw;
-}
-
 .sliders h3 {
     display: inline;
+    color: white;
+    font-size: 14px;
 }
 
 body, .contentWrapper .card, .contentWrapper .card .card-content {
@@ -145,4 +143,37 @@ body, .contentWrapper .card, .contentWrapper .card .card-content {
 .contentWrapper .card .card-content .rtxCanvasWrapper {
     display: flex;
     flex: 1;
+}
+
+.controls {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 8px;
+}
+
+.mdc-slider {
+    height: 0 !important;
+}
+
+.mdc-slider .mdc-slider__thumb {
+    height: 0 !important;
+}
+
+.mdc-slider .mdc-slider__track {
+    height: unset !important;
+    top: unset !important;
+}
+
+input[type=range] {
+    margin: 0; !important;
+}
+
+* {
+    --mdc-theme-primary: white !important;
+    --mdc-theme-secondary: white !important;
+}
+
+.sliders .slider {
+    height: 64px;
+    margin-bottom: 14px;
 }

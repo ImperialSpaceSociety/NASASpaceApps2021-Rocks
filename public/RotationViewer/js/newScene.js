@@ -183,27 +183,32 @@ function removeThing(item) {
 };
 
 function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra = 0) {
-    item.rotation.x += xRot;
-    item.rotation.y += yRot;
-    item.rotation.z += zRot;
-    item.position.x += xTra;
-    item.position.y += yTra;
-    item.position.z += zTra;
+    if (item && item.rotation) {
+        item.rotation.x += xRot;
+        item.rotation.y += yRot;
+        item.rotation.z += zRot;
+    }
+    if (item && item.position) {
+        item.position.x += xTra;
+        item.position.y += yTra;
+        item.position.z += zTra;
+    }
 };
 
+window.sliderXUpdate = function(val) {
+    xrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
+    console.log('xrot: ' + xrot);
+};
 
-window.rotationUpdate = function (outID, inID) {
-    console.log("Rotation update");
-    document.getElementById(outID).innerHTML = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5).toPrecision(2) + " rad/s";
+window.sliderYUpdate = function(val) {
+    yrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
+    console.log(yrot);
+};
 
-    if (inID == "omegaX") {
-        xrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
-    } else if (inID == "omegaY") {
-        yrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
-    } else if (inID == "omegaZ") {
-        zrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5) * fudgefactor;
-    }
-}
+window.sliderZUpdate = function(val) {
+    zrot = (parseFloat(val) / 1000 - 0.5) * fudgefactor;
+    console.log(zrot);
+};
 
 window.buttonUpdate = function (buttonID) {
     console.log("Button update");

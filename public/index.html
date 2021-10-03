@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="LightCurves/lightgraph.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
@@ -27,10 +29,18 @@
         <div class="card-content">
             <div class="raytracer">
                 <div class="buttons">
-                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Asteroid')">Asteroid</button>
-                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Tesla')">Tesla</button>
-                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Duck')">Duck</button>
-                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Cycle')">Cycle</button>
+                    <button type="button" class="waves-effect waves-light grey darken-4"
+                            onclick="buttonUpdate('Asteroid')">Asteroid
+                    </button>
+                    <button type="button" class="waves-effect waves-light grey darken-4"
+                            onclick="buttonUpdate('Tesla')">Tesla
+                    </button>
+                    <button type="button" class="waves-effect waves-light grey darken-4" onclick="buttonUpdate('Duck')">
+                        Duck
+                    </button>
+                    <button type="button" class="waves-effect waves-light grey darken-4"
+                            onclick="buttonUpdate('Cycle')">Cycle
+                    </button>
                 </div>
                 <div id="rtxCanvas" class="rtxCanvasWrapper">
                 </div>
@@ -38,7 +48,7 @@
         </div>
     </div>
     <div class="card grey darken-3">
-        <div class="card-content">
+        <div class="card-content controls">
             <div class="grapher">
                 <div class="grapherGrapger">
                     <h2 class="graphTitle">Illuminance over time</h2>
@@ -47,31 +57,58 @@
                     </div>
                 </div>
             </div>
+            <div class="sliders">
+                <div class="xSlider slider">
+                    <h3>X rotation:<span id="xout"></span></h3>
 
-            <!--<div class="sliders">
-
-                <div class="xSlider">
-                    <h3>X rotation</h3>
-                    <div id="xout"></div>
-                    <input type="range" min="1" max="1000" value="600" class="rotationSlider" id="omegaX"
-                           onchange="rotationUpdate('xout', 'omegaX')">
+                    <div class="mdc-slider" id="x-slider">
+                        <input class="mdc-slider__input" type="range" min="1" max="1000" value="600" name="volume" id="omegaX"
+                               aria-label="Continuous slider demo">
+                        <div class="mdc-slider__track">
+                            <div class="mdc-slider__track--inactive"></div>
+                            <div class="mdc-slider__track--active">
+                                <div class="mdc-slider__track--active_fill"></div>
+                            </div>
+                        </div>
+                        <div class="mdc-slider__thumb">
+                            <div class="mdc-slider__thumb-knob"></div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="ySlider">
-                    <h3>Y rotation</h3>
-                    <div id="yout"></div>
-                    <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaY"
-                           onchange="rotationUpdate('yout', 'omegaY' )">
+                <div class="ySlider slider">
+                    <h3>Y rotation: <span id="yout"></span></h3>
+                    <div class="mdc-slider" id="y-slider">
+                        <input class="mdc-slider__input" type="range" min="1" max="1000" value="600" name="volume" id="omegaY"
+                               aria-label="Continuous slider demo">
+                        <div class="mdc-slider__track">
+                            <div class="mdc-slider__track--inactive"></div>
+                            <div class="mdc-slider__track--active">
+                                <div class="mdc-slider__track--active_fill"></div>
+                            </div>
+                        </div>
+                        <div class="mdc-slider__thumb">
+                            <div class="mdc-slider__thumb-knob"></div>
+                        </div>
+                    </div>
                 </div>
+                <div class="zSlider slider">
+                    <h3>Z rotation: <span id="zout"></span></h3>
 
-                <div class="zSlider">
-                    <h3>Z rotation</h3>
-                    <div id="zout"></div>
-                    <input type="range" min="1" max="1000" value="500" class="rotationSlider" id="omegaZ"
-                           onchange="rotationUpdate('zout', 'omegaZ' )">
+                    <div class="mdc-slider" id="z-slider">
+                        <input class="mdc-slider__input" type="range" min="1" max="1000" value="600" name="volume" id="omegaZ"
+                               aria-label="Continuous slider demo">
+                        <div class="mdc-slider__track">
+                            <div class="mdc-slider__track--inactive"></div>
+                            <div class="mdc-slider__track--active">
+                                <div class="mdc-slider__track--active_fill"></div>
+                            </div>
+                        </div>
+                        <div class="mdc-slider__thumb">
+                            <div class="mdc-slider__thumb-knob"></div>
+                        </div>
+                    </div>
                 </div>
-
-            </div>-->
+            </div>
         </div>
     </div>
 </div>
@@ -85,8 +122,38 @@
     slider_change('xout', 'omegaX')
     slider_change('yout', 'omegaY')
     slider_change('zout', 'omegaZ')
-
 </script>
+<script>
+    var xSlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#x-slider'));
+    var ySlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#y-slider'));
+    var zSlider = new mdc.slider.MDCSlider(document.querySelector('.mdc-slider#z-slider'));
+    var lastXValue = xSlider.getValue();
+    var lastYValue = ySlider.getValue();
+    var lastZValue = zSlider.getValue();
 
+    setInterval(() => {
+        var xSliderValue = xSlider.getValue();
+        var ySliderValue = ySlider.getValue();
+        var zSliderValue = zSlider.getValue();
+
+        if (lastXValue !== xSliderValue) {
+            window.sliderXUpdate(xSliderValue);
+            slider_change('xout', 'omegaX');
+            lastXValue = xSliderValue;
+        }
+
+        if (lastYValue !== ySliderValue) {
+            window.sliderYUpdate(ySliderValue);
+            slider_change('yout', 'omegaY');
+            lastYValue = ySliderValue;
+        }
+
+        if (lastZValue !== zSliderValue) {
+            window.sliderZUpdate(zSliderValue);
+            slider_change('zout', 'omegaZ');
+            lastZValue = zSliderValue;
+        }
+    }, 50);
+</script>
 </body>
 </html>
