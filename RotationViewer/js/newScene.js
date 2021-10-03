@@ -45,13 +45,16 @@ const MODELS = [
     },
 ];
 
-//Variables
+//Initial Definitions
 let ModListLen = MODELS.length;
 let scene, camera, renderer, model;
 let width = window.innerWidth;
 let height = window.innerHeight;
 let modelnum = 0;
 let thingLoader, texLoader;
+
+// const canvas = document.getElementById("canvas");
+// const canvasctx = canvas.getContext("2d");
 
 function init(){
     scene = new THREE.Scene();
@@ -67,7 +70,7 @@ function init(){
         if (event.code === 'Space'){
             removeThing(model);
             console.log("Key Pressed")
-            if (modelnum <= 6){
+            if (modelnum <= ModListLen - 2){
                 modelnum += 1;
             }
             else{
@@ -75,12 +78,18 @@ function init(){
             }
             addThing(modelnum);
         }
-        
+    })
+
+    document.addEventListener("click", function onEvent(event) {
+        let mouseX = event.clientX;
+        let mouseY = event.clientY;
+        console.log(mouseX, mouseY);
     })
 
     setScene();
     addThing(modelnum);
     animate();
+    pixelData();
 };
 
 function animate(){
@@ -96,8 +105,7 @@ function setScene(){
         });
 
     //set lighting
-    const light = new THREE.PointLight(0xffffff, 5, 10e4);
-    light.position.set(0,10e3,0);
+    const light = new THREE.DirectionalLight(0xffffff, 5);
     scene.add(light);
 
     //initial camera
@@ -130,6 +138,10 @@ function transforms(item, xRot = 0, yRot = 0, zRot = 0, xTra = 0, yTra = 0, zTra
     item.position.x += xTra;
     item.position.y += yTra;
     item.position.z += zTra;
+};
+
+function pixelData(){
+
 };
 
 init();
