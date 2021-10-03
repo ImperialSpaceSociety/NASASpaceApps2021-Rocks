@@ -102,7 +102,7 @@ function animate(){
 
 function setScene(){
     //set background
-    texLoader.load('./stars.jpg', function(texture){
+    texLoader.load('RotationViewer/stars.jpg', function(texture){
         scene.background = texture;
         });
 
@@ -148,17 +148,40 @@ window.rotationUpdate= function (outID,inID){
     document.getElementById(outID).innerHTML = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5).toPrecision(2) + " rad/s";
 
     if (inID == "omegaX"){
-        console.log("omegax")
         xrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
     }
     else if (inID == "omegaY"){
-        console.log("omegaY")
         yrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
     }
     else if (inID == "omegaZ"){
-        console.log("omegaZ")
         zrot = (parseFloat(document.getElementById(inID).value) / 1000 - 0.5)*fudgefactor;
     }
+}
+
+window.buttonUpdate= function (buttonID){
+    console.log("Button update");
+    removeThing(model);
+
+    if (buttonID == "Asteroid"){
+        modelnum = 3;
+    }
+    else if (buttonID == "Tesla"){
+        modelnum = 5;
+    }
+    else if (buttonID == "Duck"){
+        modelnum = 1;
+    }
+    else if (buttonID == "Cycle"){
+        console.log("Key Pressed")
+        if (modelnum <= ModListLen - 2){
+            modelnum += 1;
+        }
+        else{
+            modelnum = 0;
+        }
+
+    }
+    addThing(modelnum);
 }
 
 function pixelData(){
