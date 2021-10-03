@@ -80,8 +80,6 @@ h1 {
 }
 
 .buttons button {
-    width: 10vw;
-    height: 7vh;
     text-align: center;
     display: inline-block;
     font-size: 1.5em;
@@ -110,12 +108,12 @@ h1 {
 
 .contentWrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    background-color: lightgrey;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
     column-gap: 16px;
+    row-gap: 16px;
     padding: 16px;
     height: calc(100vh - 64px);
-    grid-template-rows: 1fr;
 }
 
 .contentWrapper .card {
@@ -125,6 +123,7 @@ h1 {
 .rtxCanvasWrapper {
     flex: 1;
     margin-top: 16px;
+    min-height: 300px;
 }
 
 .graphTitle {
@@ -252,5 +251,11 @@ input[type=range] {
     .modal-trigger {
         margin-left: 16px;
     }
+}
 
+@media only screen and (min-width: 1440px) {
+    .contentWrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
 }

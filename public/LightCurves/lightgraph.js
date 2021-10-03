@@ -1,6 +1,6 @@
 let normalizedIlluminance = [];
 let time = [];
-const buffer = 80;
+const buffer = 100;
 
 function DrawChart(ys, xs) {
     const context = document.getElementById('lightGraph');
